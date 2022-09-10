@@ -65,6 +65,6 @@ grandmother(X,Y):-mother(X,Z), parent(Z,Y).
 grandfather(X,Y):-father(X,Z), parent(Z,Y).
 father_in_law(X,Y):-father(X,Z), (spouse(Z,Y); spouse(Y,Z)).
 mother_in_law(X,Y):-mother(X,Z), (spouse(Z,Y); spouse(Y,Z)).
-uncle(X,Y):-brother(X,Z), parent(Z,Y), X<>Z.
+uncle(X,Y):-brother(X,Z), parent(Z,Y), X\=Z.
 aunt(X,Y):-sister(X,Z), parent(Z,Y), X\=Z.
 child(X,Y):-parent(Y,X).
