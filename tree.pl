@@ -22,10 +22,10 @@ female(hani).
 female(lisa).
 
 spouse(taylor,jack).
+spouse(lona,norman).
 spouse(kim,louis).
 spouse(katy,james).
 spouse(victor,angel).
-spouse(norman,lona).
 spouse(noel,cara).
 spouse(andrew,carol).
 spouse(jorden,lisa).
@@ -55,17 +55,16 @@ parent(lisa,hani).
 parent(jorden,mimi).
 parent(jorden,hani).
 
-
-wife(X,Y):-female(X), spouse(X,Y).
-husband(X,Y):-male(X), spouse(X,Y).
+wife(X,Y):-female(X), (spouse(X,Y); spouse(Y,X)).
+husband(X,Y):-male(X), (spouse(X,Y); spouse(Y,X)).
 mother(X,Y):-female(X), parent(X,Y).
 father(X,Y):-male(X), parent(X,Y).
 sister(X,Y):-female(X), parent(Z,X), parent(Z,Y), X\=Y.
 brother(X,Y):-male(X), parent(Z,X), parent(Z,Y), X\=Y.
 grandmother(X,Y):-mother(X,Z), parent(Z,Y).
 grandfather(X,Y):-father(X,Z), parent(Z,Y).
-father_in_law(X,Y):-father(X,Z), spouse(Z,Y).
-mother_in_law(X,Y):-mother(X,Z), spouse(Z,Y).
-uncle(X,Y):-brother(X,Z), parent(Z,Y), X\=Z.
+father_in_law(X,Y):-father(X,Z), (spouse(Z,Y); spouse(Y,Z)).
+mother_in_law(X,Y):-mother(X,Z), (spouse(Z,Y); spouse(Y,Z)).
+uncle(X,Y):-brother(X,Z), parent(Z,Y), X<>Z.
 aunt(X,Y):-sister(X,Z), parent(Z,Y), X\=Z.
 child(X,Y):-parent(Y,X).
